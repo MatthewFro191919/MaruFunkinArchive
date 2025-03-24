@@ -200,20 +200,22 @@ class PlayState extends MusicBeatState
 		*/
 		ModdingUtil.clearScripts(); //Clear any scripts left over
 
-		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-		// STAGE SCRIPTS
-		#if LUA_ALLOWED startLuasNamed('stages/' + curStage + '.lua'); #end
-		#if HSCRIPT_ALLOWED startHScriptsNamed('stages/' + curStage + '.hx'); #end
-
+		
+		#if LUA_ALLOWED 
 		// CHARACTER SCRIPTS
 		if(gf != null) startCharacterScripts(gf.curCharacter);
 		startCharacterScripts(dad.curCharacter);
 		startCharacterScripts(boyfriend.curCharacter);
-		#end
-
 		stageGroup = new TypedGroup<Stage>();
 		stageGroup.add(stage);
 		add(stageGroup);
+                #end
+		
+		// Stage Script
+		var stageScript = ModdingUtil.addScript(Paths.script('stages/$curStage'));
+		stage = Stage.fromJson(stageData, stageScript);
+		
+		#if LUA_ALLOWED startLuasNamed('stages/' + curStage + '.lua'); #end
 
 		if (cript != null)
 			cript.set("ScriptStage", stage);
