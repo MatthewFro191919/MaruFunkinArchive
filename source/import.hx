@@ -11,7 +11,7 @@ import funkin.MobileTouch;
 
 #if LUA_ALLOWED
 import psychlua.*;
-#else
+#end
 
 //Song
 import funkin.util.song.Conductor;
