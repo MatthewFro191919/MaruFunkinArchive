@@ -9,6 +9,10 @@ import funkin.Preferences.getPref;
 import funkin.MobileTouch;
 #end
 
+#if LUA_ALLOWED
+import psychlua.*;
+#else
+
 //Song
 import funkin.util.song.Conductor;
 import funkin.util.song.Highscore;
